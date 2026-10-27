@@ -246,25 +246,24 @@ export function ThreeHeroCar({
       const idleRoll = Math.cos(elapsedTime * 1.2) * 0.015;
 
       if (carMesh) {
-        // Apply cursor 3D movement + 3JS scroll driving effect
-        // On scroll down: car drives forward (translates along Z), shifts slightly and banks
-        const scrollDriveZ = scrollProgress * 1.2;
-        const scrollDriveX = scrollProgress * 0.6;
-        const scrollPitch = scrollProgress * 0.15;
+        // Subtle, refined 3D parallax on scroll: stays poised and anchored without distracting from content
+        const scrollDriveZ = scrollProgress * 0.15;
+        const scrollDriveX = scrollProgress * 0.08;
+        const scrollPitch = scrollProgress * 0.04;
 
-        carMesh.rotation.y = currentRotationY + (scrollProgress * 0.25);
+        carMesh.rotation.y = currentRotationY + (scrollProgress * 0.06);
         carMesh.rotation.x = currentRotationX + scrollPitch;
-        carMesh.rotation.z = idleRoll + (-currentRotationY * 0.2);
+        carMesh.rotation.z = idleRoll + (-currentRotationY * 0.15);
 
         carMesh.position.x = currentPositionX + scrollDriveX;
-        carMesh.position.y = 0.15 + currentPositionY + idleFloat - (scrollProgress * 0.15);
+        carMesh.position.y = 0.15 + currentPositionY + idleFloat - (scrollProgress * 0.06);
         carMesh.position.z = scrollDriveZ;
 
         // Synchronize shadow with car position
         if (shadowMesh) {
           shadowMesh.position.x = carMesh.position.x;
-          shadowMesh.position.z = 0.2 + (scrollDriveZ * 0.8);
-          shadowMesh.rotation.z = carMesh.rotation.z * 0.5;
+          shadowMesh.position.z = 0.2 + (scrollDriveZ * 0.6);
+          shadowMesh.rotation.z = carMesh.rotation.z * 0.4;
         }
       }
 

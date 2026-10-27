@@ -21,66 +21,55 @@ export function GSAPScrollProvider({ children }: { children: React.ReactNode }) 
     // Small delay to ensure React DOM hydration has completed
     const timer = setTimeout(() => {
       const ctx = gsap.context(() => {
-        // 1. Reveal page headings with bidirectional play/reverse
+        // 1. Reveal page headings with subtle, graceful upward fade
         const pageHeadings = mainRef.current?.querySelectorAll("h1, h2");
         if (pageHeadings && pageHeadings.length > 0) {
-          pageHeadings.forEach((heading, i) => {
+          pageHeadings.forEach((heading) => {
             if (!heading) return;
             gsap.fromTo(
               heading,
               {
                 opacity: 0,
-                x: i % 2 === 0 ? -45 : 45,
-                y: 15,
+                y: 14,
               },
               {
                 opacity: 1,
-                x: 0,
                 y: 0,
-                duration: 0.75,
+                duration: 0.6,
                 ease: "power2.out",
                 scrollTrigger: {
                   trigger: heading,
-                  start: "top 92%",
-                  end: "bottom 10%",
-                  toggleActions: "play reverse play reverse",
+                  start: "top 94%",
+                  once: true,
                 },
               }
             );
           });
         }
 
-        // 2. Batch scroll reveal with alternating left/right directions and bidirectional entry/exit
+        // 2. Smooth, calm card and section reveals (subtle vertical lift, no alternating left/right jolts)
         const animatedTargets = mainRef.current?.querySelectorAll(
           "section > div, .rounded-3xl, .rounded-2xl, article, table, form"
         );
 
         if (animatedTargets && animatedTargets.length > 0) {
-          animatedTargets.forEach((target, index) => {
+          animatedTargets.forEach((target) => {
             if (!target) return;
-            const fromLeft = index % 2 === 0;
-            const initX = fromLeft ? -50 : 50;
-
             gsap.fromTo(
               target,
               {
                 opacity: 0,
-                x: initX,
-                y: 20,
-                scale: 0.98,
+                y: 16,
               },
               {
                 opacity: 1,
-                x: 0,
                 y: 0,
-                scale: 1,
-                duration: 0.7,
+                duration: 0.6,
                 ease: "power2.out",
                 scrollTrigger: {
                   trigger: target,
-                  start: "top 88%",
-                  end: "bottom 10%",
-                  toggleActions: "play reverse play reverse",
+                  start: "top 92%",
+                  once: true,
                 },
               }
             );

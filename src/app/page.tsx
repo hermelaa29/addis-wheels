@@ -86,13 +86,13 @@ export default function HomePage() {
     if (typeof window === "undefined" || !pageContainerRef.current) return;
 
     const ctx = gsap.context(() => {
-      // 1. Hero Reveal Stagger (Directional & Balanced)
+      // 1. Hero Reveal: Subtle, harmonious vertical fade-up
       const heroTitles = pageContainerRef.current?.querySelectorAll(".gsap-hero-title");
       if (heroTitles && heroTitles.length > 0) {
         gsap.fromTo(
           heroTitles,
-          { opacity: 0, x: -50 },
-          { opacity: 1, x: 0, duration: 0.85, ease: "power3.out" }
+          { opacity: 0, y: 16 },
+          { opacity: 1, y: 0, duration: 0.7, stagger: 0.08, ease: "power2.out" }
         );
       }
 
@@ -100,8 +100,8 @@ export default function HomePage() {
       if (heroDesc) {
         gsap.fromTo(
           heroDesc,
-          { opacity: 0, x: 50 },
-          { opacity: 1, x: 0, duration: 0.8, delay: 0.15, ease: "power2.out" }
+          { opacity: 0, y: 14 },
+          { opacity: 1, y: 0, duration: 0.7, delay: 0.1, ease: "power2.out" }
         );
       }
 
@@ -109,8 +109,8 @@ export default function HomePage() {
       if (heroStats) {
         gsap.fromTo(
           heroStats,
-          { opacity: 0, scale: 0.85 },
-          { opacity: 1, scale: 1, duration: 0.75, delay: 0.25, ease: "back.out(1.5)" }
+          { opacity: 0, y: 14 },
+          { opacity: 1, y: 0, duration: 0.65, delay: 0.18, ease: "power2.out" }
         );
       }
 
@@ -118,8 +118,8 @@ export default function HomePage() {
       if (searchPanel) {
         gsap.fromTo(
           searchPanel,
-          { opacity: 0, y: 45, scale: 0.96 },
-          { opacity: 1, y: 0, scale: 1, duration: 0.85, delay: 0.35, ease: "power3.out" }
+          { opacity: 0, y: 18 },
+          { opacity: 1, y: 0, duration: 0.75, delay: 0.22, ease: "power2.out" }
         );
       }
 
@@ -127,277 +127,152 @@ export default function HomePage() {
       if (heroCar) {
         gsap.fromTo(
           heroCar,
-          { opacity: 0, x: 60, scale: 0.94 },
-          { opacity: 1, x: 0, scale: 1, duration: 0.9, delay: 0.25, ease: "power3.out" }
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.8, delay: 0.15, ease: "power2.out" }
         );
       }
 
-      // 2. Trust Guarantees Strip: alternating left/right with bidirectional toggleActions
+      // 2. Trust Guarantees Strip: Smooth, calm staggered fade-up
       const trustItems = pageContainerRef.current?.querySelectorAll(".gsap-trust-item");
       if (trustItems && trustItems.length > 0) {
-        trustItems.forEach((item, index) => {
-          if (!item) return;
-          const fromLeft = index % 2 === 0;
-          gsap.fromTo(
-            item,
-            { opacity: 0, x: fromLeft ? -45 : 45, y: 15 },
-            {
-              opacity: 1,
-              x: 0,
-              y: 0,
-              duration: 0.65,
-              ease: "power2.out",
-              scrollTrigger: {
-                trigger: item,
-                start: "top 92%",
-                end: "bottom 8%",
-                toggleActions: "play reverse play reverse",
-              },
-            }
-          );
-        });
+        gsap.fromTo(
+          trustItems,
+          { opacity: 0, y: 14 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            stagger: 0.05,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: trustItems[0],
+              start: "top 94%",
+              once: true,
+            },
+          }
+        );
       }
 
-      // 3. Featured Fleet Header (enters from left)
+      // 3. Featured Fleet Header: Graceful fade-up
       const featuredHeader = pageContainerRef.current?.querySelector(".gsap-featured-header");
       const featuredSection = pageContainerRef.current?.querySelector(".gsap-featured-section") || featuredHeader;
       if (featuredHeader && featuredSection) {
         gsap.fromTo(
           featuredHeader,
-          { opacity: 0, x: -55 },
+          { opacity: 0, y: 16 },
           {
             opacity: 1,
-            x: 0,
-            duration: 0.8,
+            y: 0,
+            duration: 0.6,
             ease: "power2.out",
             scrollTrigger: {
               trigger: featuredSection,
-              start: "top 85%",
-              end: "bottom 15%",
-              toggleActions: "play reverse play reverse",
+              start: "top 88%",
+              once: true,
             },
           }
         );
       }
 
-      // 4. Featured Car Cards - EACH CARD HAS ITS OWN CUSTOM UNIQUE EFFECT!
+      // 4. Featured Car Cards: Cohesive, luxurious staggered card reveal (rock-solid, non-distracting)
       const carCards = pageContainerRef.current?.querySelectorAll(".gsap-car-card");
       if (carCards && carCards.length > 0) {
-        carCards.forEach((card, index) => {
-          if (!card) return;
-          if (index === 0) {
-            // Card 0: Enters from left with dynamic rotation tilt
-            gsap.fromTo(
-              card,
-              { opacity: 0, x: -75, rotation: -4 },
-              {
-                opacity: 1,
-                x: 0,
-                rotation: 0,
-                duration: 0.75,
-                ease: "power3.out",
-                scrollTrigger: {
-                  trigger: card,
-                  start: "top 88%",
-                  end: "bottom 12%",
-                  toggleActions: "play reverse play reverse",
-                },
-              }
-            );
-          } else if (index === 1) {
-            // Card 1: Zoom / Pop entrance with scale bounce from bottom
-            gsap.fromTo(
-              card,
-              { opacity: 0, scale: 0.8, y: 45 },
-              {
-                opacity: 1,
-                scale: 1,
-                y: 0,
-                duration: 0.75,
-                ease: "back.out(1.4)",
-                scrollTrigger: {
-                  trigger: card,
-                  start: "top 88%",
-                  end: "bottom 12%",
-                  toggleActions: "play reverse play reverse",
-                },
-              }
-            );
-          } else if (index === 2) {
-            // Card 2: Dropdown drop from top with smooth settle
-            gsap.fromTo(
-              card,
-              { opacity: 0, y: -55, scale: 0.9 },
-              {
-                opacity: 1,
-                y: 0,
-                scale: 1,
-                duration: 0.75,
-                ease: "power2.out",
-                scrollTrigger: {
-                  trigger: card,
-                  start: "top 88%",
-                  end: "bottom 12%",
-                  toggleActions: "play reverse play reverse",
-                },
-              }
-            );
-          } else if (index === 3) {
-            // Card 3: Enters from right with dynamic rotation tilt
-            gsap.fromTo(
-              card,
-              { opacity: 0, x: 75, rotation: 4 },
-              {
-                opacity: 1,
-                x: 0,
-                rotation: 0,
-                duration: 0.75,
-                ease: "power3.out",
-                scrollTrigger: {
-                  trigger: card,
-                  start: "top 88%",
-                  end: "bottom 12%",
-                  toggleActions: "play reverse play reverse",
-                },
-              }
-            );
-          } else {
-            // Generic extra cards: gentle slide up
-            gsap.fromTo(
-              card,
-              { opacity: 0, y: 35, scale: 0.96 },
-              {
-                opacity: 1,
-                y: 0,
-                scale: 1,
-                duration: 0.6,
-                ease: "power2.out",
-                scrollTrigger: {
-                  trigger: card,
-                  start: "top 88%",
-                  end: "bottom 12%",
-                  toggleActions: "play reverse play reverse",
-                },
-              }
-            );
+        gsap.fromTo(
+          carCards,
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            stagger: 0.08,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: carCards[0],
+              start: "top 90%",
+              once: true,
+            },
           }
-        });
+        );
       }
 
-      // 5. How It Works Section: Header + Split Left/Right Entrances
+      // 5. How It Works Section: Smooth unified presentation
       const hiwHeader = pageContainerRef.current?.querySelector(".gsap-hiw-header");
       const hiwSection = pageContainerRef.current?.querySelector(".gsap-hiw-section") || hiwHeader;
       if (hiwHeader && hiwSection) {
         gsap.fromTo(
           hiwHeader,
-          { opacity: 0, y: 35 },
+          { opacity: 0, y: 16 },
           {
             opacity: 1,
             y: 0,
-            duration: 0.8,
+            duration: 0.6,
             ease: "power2.out",
             scrollTrigger: {
               trigger: hiwSection,
-              start: "top 85%",
-              end: "bottom 15%",
-              toggleActions: "play reverse play reverse",
+              start: "top 88%",
+              once: true,
             },
           }
         );
       }
 
-      const hiwCards = pageContainerRef.current?.querySelector(".gsap-hiw-cards") || hiwSection;
-      const hiwLeft = pageContainerRef.current?.querySelector(".gsap-hiw-card-left");
-      if (hiwLeft && hiwCards) {
+      const hiwCards = pageContainerRef.current?.querySelectorAll(".gsap-hiw-card-left, .gsap-hiw-card-right");
+      if (hiwCards && hiwCards.length > 0) {
         gsap.fromTo(
-          hiwLeft,
-          { opacity: 0, x: -75 },
+          hiwCards,
+          { opacity: 0, y: 20 },
           {
             opacity: 1,
-            x: 0,
-            duration: 0.8,
+            y: 0,
+            duration: 0.65,
+            stagger: 0.1,
             ease: "power2.out",
             scrollTrigger: {
-              trigger: hiwCards,
-              start: "top 85%",
-              end: "bottom 15%",
-              toggleActions: "play reverse play reverse",
+              trigger: hiwCards[0],
+              start: "top 88%",
+              once: true,
             },
           }
         );
       }
 
-      const hiwRight = pageContainerRef.current?.querySelector(".gsap-hiw-card-right");
-      if (hiwRight && hiwCards) {
-        gsap.fromTo(
-          hiwRight,
-          { opacity: 0, x: 75 },
-          {
-            opacity: 1,
-            x: 0,
-            duration: 0.8,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: hiwCards,
-              start: "top 85%",
-              end: "bottom 15%",
-              toggleActions: "play reverse play reverse",
-            },
-          }
-        );
-      }
-
-      // 6. Platform Guarantees Section (3 Cards: Left, Center Drop, Right)
+      // 6. Platform Guarantees Section: Harmonious 3-card staggered reveal
       const guaranteeCards = pageContainerRef.current?.querySelectorAll(".gsap-guarantee-card");
       if (guaranteeCards && guaranteeCards.length > 0) {
-        guaranteeCards.forEach((card, i) => {
-          if (!card) return;
-          const fromLeft = i % 3 === 0;
-          const fromCenter = i % 3 === 1;
-          gsap.fromTo(
-            card,
-            {
-              opacity: 0,
-              x: fromLeft ? -60 : fromCenter ? 0 : 60,
-              y: fromCenter ? -45 : 15,
-              scale: fromCenter ? 0.92 : 0.96,
+        gsap.fromTo(
+          guaranteeCards,
+          { opacity: 0, y: 18 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            stagger: 0.08,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: guaranteeCards[0],
+              start: "top 90%",
+              once: true,
             },
-            {
-              opacity: 1,
-              x: 0,
-              y: 0,
-              scale: 1,
-              duration: 0.7,
-              ease: "power2.out",
-              scrollTrigger: {
-                trigger: card,
-                start: "top 90%",
-                end: "bottom 10%",
-                toggleActions: "play reverse play reverse",
-              },
-            }
-          );
-        });
+          }
+        );
       }
 
-      // 7. Call To Action Banner: Animate inner content to keep section free of transform glitches
+      // 7. Call To Action Banner: Subtle, refined lift
       const ctaContent = pageContainerRef.current?.querySelector(".gsap-cta-content");
       const ctaSection = pageContainerRef.current?.querySelector(".gsap-cta-section") || ctaContent;
       if (ctaContent && ctaSection) {
         gsap.fromTo(
           ctaContent,
-          { opacity: 0, scale: 0.95, y: 25 },
+          { opacity: 0, y: 18 },
           {
             opacity: 1,
-            scale: 1,
             y: 0,
-            duration: 0.8,
-            ease: "power3.out",
+            duration: 0.6,
+            ease: "power2.out",
             scrollTrigger: {
               trigger: ctaSection,
-              start: "top 85%",
-              end: "bottom 15%",
-              toggleActions: "play reverse play reverse",
+              start: "top 88%",
+              once: true,
             },
           }
         );
