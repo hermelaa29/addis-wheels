@@ -8,6 +8,13 @@ import { RoleGuard } from "@/components/RoleGuard";
 import { Badge } from "@/components/Badge";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Calendar, Search, Download, Car, ArrowRight } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function AdminBookingsPage() {
   const isMounted = useIsMounted();
@@ -119,19 +126,20 @@ export default function AdminBookingsPage() {
 
           <div className="flex items-center gap-2 w-full sm:w-auto">
             <span className="text-xs font-bold text-slate-500">Status:</span>
-            <select
-              value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value)}
-              className="bg-slate-50 border border-slate-200 rounded-xl px-3 py-1.5 text-xs font-medium text-slate-800 outline-none focus:ring-2 focus:ring-emerald-500 w-full sm:w-auto"
-            >
-              <option value="all">All Statuses ({allBookings.length})</option>
-              <option value="requested">Requested</option>
-              <option value="confirmed">Confirmed</option>
-              <option value="in_progress">In Progress</option>
-              <option value="completed">Completed</option>
-              <option value="cancelled">Cancelled</option>
-              <option value="disputed">Disputed</option>
-            </select>
+            <Select value={statusFilter} onValueChange={(val) => setStatusFilter(val)}>
+              <SelectTrigger className="h-9 w-full sm:w-48 bg-slate-50 border-slate-200 rounded-xl text-xs font-semibold">
+                <SelectValue placeholder="All Statuses" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Statuses ({allBookings.length})</SelectItem>
+                <SelectItem value="requested">Requested</SelectItem>
+                <SelectItem value="confirmed">Confirmed</SelectItem>
+                <SelectItem value="in_progress">In Progress</SelectItem>
+                <SelectItem value="completed">Completed</SelectItem>
+                <SelectItem value="cancelled">Cancelled</SelectItem>
+                <SelectItem value="disputed">Disputed</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
         </div>
 

@@ -8,6 +8,13 @@ import { RoleGuard } from "@/components/RoleGuard";
 import { Badge } from "@/components/Badge";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { AlertTriangle, CheckCircle2, Clock, ShieldCheck, ArrowRight } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function AdminDisputesPage() {
   const isMounted = useIsMounted();
@@ -45,15 +52,16 @@ export default function AdminDisputesPage() {
 
           <div className="flex items-center gap-2">
             <span className="text-xs font-bold text-slate-500">Filter:</span>
-            <select
-              value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value)}
-              className="bg-white border border-slate-200 rounded-xl px-3 py-1.5 text-xs font-semibold text-slate-800 outline-none focus:ring-2 focus:ring-emerald-500 shadow-sm"
-            >
-              <option value="all">All Disputes ({allDisputes.length})</option>
-              <option value="open">Open / Action Needed</option>
-              <option value="resolved">Resolved</option>
-            </select>
+            <Select value={statusFilter} onValueChange={(val) => setStatusFilter(val)}>
+              <SelectTrigger className="h-9 w-44 bg-white border-slate-200 rounded-xl text-xs font-semibold shadow-sm">
+                <SelectValue placeholder="All Disputes" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Disputes ({allDisputes.length})</SelectItem>
+                <SelectItem value="open">Open / Action Needed</SelectItem>
+                <SelectItem value="resolved">Resolved</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
         </div>
 

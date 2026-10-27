@@ -8,6 +8,13 @@ import { useSession, useIsMounted } from "@/lib/useStorage";
 import { RoleGuard } from "@/components/RoleGuard";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Car, AlertCircle, ArrowRight, ShieldAlert, CheckCircle } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function EditCarListingPage() {
   const params = useParams();
@@ -180,14 +187,15 @@ export default function EditCarListingPage() {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div>
                 <label className="block text-xs font-bold text-slate-600 uppercase mb-1">Transmission</label>
-                <select
-                  value={transmission}
-                  onChange={(e) => setTransmission(e.target.value as any)}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-800 outline-none focus:ring-2 focus:ring-emerald-500"
-                >
-                  <option value="automatic">Automatic</option>
-                  <option value="manual">Manual</option>
-                </select>
+                <Select value={transmission} onValueChange={(val: any) => setTransmission(val)}>
+                  <SelectTrigger className="h-10 bg-slate-50 border-slate-200 rounded-xl text-xs">
+                    <SelectValue placeholder="Select transmission" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="automatic">Automatic</SelectItem>
+                    <SelectItem value="manual">Manual</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
 
               <div>
@@ -220,20 +228,21 @@ export default function EditCarListingPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs font-bold text-slate-600 uppercase mb-1">Neighbourhood</label>
-                <select
-                  value={neighbourhood}
-                  onChange={(e) => setNeighbourhood(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-800 outline-none focus:ring-2 focus:ring-emerald-500"
-                >
-                  <option value="Bole">Bole</option>
-                  <option value="Kazanchis">Kazanchis</option>
-                  <option value="Sarbet">Sarbet</option>
-                  <option value="Piassa">Piassa</option>
-                  <option value="CMC">CMC</option>
-                  <option value="Old Airport">Old Airport</option>
-                  <option value="Megenagna">Megenagna</option>
-                  <option value="Mexico">Mexico</option>
-                </select>
+                <Select value={neighbourhood} onValueChange={(val) => setNeighbourhood(val)}>
+                  <SelectTrigger className="h-10 bg-slate-50 border-slate-200 rounded-xl text-xs">
+                    <SelectValue placeholder="Select neighbourhood" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Bole">Bole</SelectItem>
+                    <SelectItem value="Kazanchis">Kazanchis</SelectItem>
+                    <SelectItem value="Sarbet">Sarbet</SelectItem>
+                    <SelectItem value="Piassa">Piassa</SelectItem>
+                    <SelectItem value="CMC">CMC</SelectItem>
+                    <SelectItem value="Old Airport">Old Airport</SelectItem>
+                    <SelectItem value="Megenagna">Megenagna</SelectItem>
+                    <SelectItem value="Mexico">Mexico</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
 
               <div>

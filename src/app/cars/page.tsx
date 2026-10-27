@@ -19,6 +19,13 @@ import {
   Filter,
   SlidersHorizontal,
 } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function CarCataloguePage() {
   const searchParams = useSearchParams();
@@ -247,26 +254,29 @@ export default function CarCataloguePage() {
             <label htmlFor="filter-neighbourhood" className="block text-[11px] font-extrabold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
               Neighbourhood
             </label>
-            <select
-              id="filter-neighbourhood"
+            <Select
               value={neighbourhood}
-              onChange={(e) => {
-                setNeighbourhood(e.target.value);
+              onValueChange={(val) => {
+                setNeighbourhood(val);
                 handleFilterChange();
-                updateUrlParams({ neighbourhood: e.target.value });
+                updateUrlParams({ neighbourhood: val });
               }}
-              className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-1.5 text-xs font-semibold text-slate-800 dark:text-slate-100 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-emerald-500 outline-none cursor-pointer"
             >
-              <option value="all" className="dark:bg-slate-900">All Addis</option>
-              <option value="Bole" className="dark:bg-slate-900">Bole</option>
-              <option value="Kazanchis" className="dark:bg-slate-900">Kazanchis</option>
-              <option value="Sarbet" className="dark:bg-slate-900">Sarbet</option>
-              <option value="Piassa" className="dark:bg-slate-900">Piassa</option>
-              <option value="CMC" className="dark:bg-slate-900">CMC</option>
-              <option value="Old Airport" className="dark:bg-slate-900">Old Airport</option>
-              <option value="Megenagna" className="dark:bg-slate-900">Megenagna</option>
-              <option value="Mexico" className="dark:bg-slate-900">Mexico</option>
-            </select>
+              <SelectTrigger id="filter-neighbourhood" className="h-9 rounded-xl text-xs font-semibold bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700">
+                <SelectValue placeholder="All Addis" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Addis</SelectItem>
+                <SelectItem value="Bole">Bole</SelectItem>
+                <SelectItem value="Kazanchis">Kazanchis</SelectItem>
+                <SelectItem value="Sarbet">Sarbet</SelectItem>
+                <SelectItem value="Piassa">Piassa</SelectItem>
+                <SelectItem value="CMC">CMC</SelectItem>
+                <SelectItem value="Old Airport">Old Airport</SelectItem>
+                <SelectItem value="Megenagna">Megenagna</SelectItem>
+                <SelectItem value="Mexico">Mexico</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
 
           {/* Transmission */}
@@ -274,20 +284,23 @@ export default function CarCataloguePage() {
             <label htmlFor="filter-transmission" className="block text-[11px] font-extrabold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
               Transmission
             </label>
-            <select
-              id="filter-transmission"
+            <Select
               value={transmission}
-              onChange={(e) => {
-                setTransmission(e.target.value);
+              onValueChange={(val) => {
+                setTransmission(val);
                 handleFilterChange();
-                updateUrlParams({ transmission: e.target.value });
+                updateUrlParams({ transmission: val });
               }}
-              className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-1.5 text-xs font-semibold text-slate-800 dark:text-slate-100 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-emerald-500 outline-none cursor-pointer"
             >
-              <option value="all" className="dark:bg-slate-900">Any Gearbox</option>
-              <option value="automatic" className="dark:bg-slate-900">Automatic</option>
-              <option value="manual" className="dark:bg-slate-900">Manual</option>
-            </select>
+              <SelectTrigger id="filter-transmission" className="h-9 rounded-xl text-xs font-semibold bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700">
+                <SelectValue placeholder="Any Gearbox" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Any Gearbox</SelectItem>
+                <SelectItem value="automatic">Automatic</SelectItem>
+                <SelectItem value="manual">Manual</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
 
           {/* Seats */}
@@ -295,23 +308,26 @@ export default function CarCataloguePage() {
             <label htmlFor="filter-seats" className="block text-[11px] font-extrabold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
               Min Seats
             </label>
-            <select
-              id="filter-seats"
-              value={seats}
-              onChange={(e) => {
-                const s = Number(e.target.value);
+            <Select
+              value={String(seats)}
+              onValueChange={(val) => {
+                const s = Number(val);
                 setSeats(s);
                 handleFilterChange();
                 updateUrlParams({ seats: s });
               }}
-              className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-1.5 text-xs font-semibold text-slate-800 dark:text-slate-100 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-emerald-500 outline-none cursor-pointer"
             >
-              <option value={0} className="dark:bg-slate-900">Any Capacity</option>
-              <option value={4} className="dark:bg-slate-900">4+ Seats</option>
-              <option value={5} className="dark:bg-slate-900">5+ Seats</option>
-              <option value={7} className="dark:bg-slate-900">7+ Seats</option>
-              <option value={10} className="dark:bg-slate-900">10+ Seats</option>
-            </select>
+              <SelectTrigger id="filter-seats" className="h-9 rounded-xl text-xs font-semibold bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700">
+                <SelectValue placeholder="Any Capacity" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="0">Any Capacity</SelectItem>
+                <SelectItem value="4">4+ Seats</SelectItem>
+                <SelectItem value="5">5+ Seats</SelectItem>
+                <SelectItem value="7">7+ Seats</SelectItem>
+                <SelectItem value="10">10+ Seats</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
 
           {/* Sort By */}
@@ -319,20 +335,23 @@ export default function CarCataloguePage() {
             <label htmlFor="filter-sort" className="block text-[11px] font-extrabold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
               Sort By
             </label>
-            <select
-              id="filter-sort"
+            <Select
               value={sortBy}
-              onChange={(e) => {
-                setSortBy(e.target.value);
-                updateUrlParams({ sort: e.target.value });
+              onValueChange={(val) => {
+                setSortBy(val);
+                updateUrlParams({ sort: val });
               }}
-              className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-1.5 text-xs font-semibold text-slate-800 dark:text-slate-100 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-emerald-500 outline-none cursor-pointer"
             >
-              <option value="newest" className="dark:bg-slate-900">Newest Listed</option>
-              <option value="price_asc" className="dark:bg-slate-900">Price: Low to High</option>
-              <option value="price_desc" className="dark:bg-slate-900">Price: High to Low</option>
-              <option value="seats" className="dark:bg-slate-900">Most Seats</option>
-            </select>
+              <SelectTrigger id="filter-sort" className="h-9 rounded-xl text-xs font-semibold bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700">
+                <SelectValue placeholder="Sort By" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="newest">Newest Listed</SelectItem>
+                <SelectItem value="price_asc">Price: Low to High</SelectItem>
+                <SelectItem value="price_desc">Price: High to Low</SelectItem>
+                <SelectItem value="seats">Most Seats</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
         </div>
 

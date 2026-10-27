@@ -8,6 +8,13 @@ import { RoleGuard } from "@/components/RoleGuard";
 import { Badge } from "@/components/Badge";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Users, Search, ShieldCheck, ShieldAlert, CheckCircle2, User } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function AdminUsersPage() {
   const isMounted = useIsMounted();
@@ -86,16 +93,17 @@ export default function AdminUsersPage() {
 
           <div className="flex items-center gap-2 w-full sm:w-auto">
             <span className="text-xs font-bold text-slate-500">Role:</span>
-            <select
-              value={roleFilter}
-              onChange={(e) => setRoleFilter(e.target.value)}
-              className="bg-slate-50 border border-slate-200 rounded-xl px-3 py-1.5 text-xs font-medium text-slate-800 outline-none focus:ring-2 focus:ring-emerald-500 w-full sm:w-auto"
-            >
-              <option value="all">All Roles ({allUsers.length})</option>
-              <option value="renter">Renters</option>
-              <option value="owner">Car Hosts</option>
-              <option value="admin">Administrators</option>
-            </select>
+            <Select value={roleFilter} onValueChange={(val) => setRoleFilter(val)}>
+              <SelectTrigger className="h-9 w-full sm:w-48 bg-slate-50 border-slate-200 rounded-xl text-xs font-semibold">
+                <SelectValue placeholder="All Roles" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Roles ({allUsers.length})</SelectItem>
+                <SelectItem value="renter">Renters</SelectItem>
+                <SelectItem value="owner">Car Hosts</SelectItem>
+                <SelectItem value="admin">Administrators</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
         </div>
 

@@ -25,6 +25,13 @@ import {
   Zap,
   ShieldCheck,
 } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -464,23 +471,22 @@ export default function HomePage() {
                     <label htmlFor="hero-neighbourhood" className="block text-[9.5px] font-extrabold uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-0.5 flex items-center gap-1">
                       <MapPin className="w-2.5 h-2.5 text-emerald-600 dark:text-emerald-400" /> Pick-Up Hub
                     </label>
-                    <select
-                      id="hero-neighbourhood"
-                      name="neighbourhood"
-                      value={neighbourhood}
-                      onChange={(e) => setNeighbourhood(e.target.value)}
-                      className="w-full bg-transparent text-xs font-bold text-slate-900 dark:text-white outline-none cursor-pointer"
-                    >
-                      <option value="all" className="dark:bg-slate-900">All Addis Ababa Hubs</option>
-                      <option value="Bole" className="dark:bg-slate-900">Bole (Airport & Express)</option>
-                      <option value="Kazanchis" className="dark:bg-slate-900">Kazanchis (Business District)</option>
-                      <option value="Old Airport" className="dark:bg-slate-900">Old Airport (Diplomatic)</option>
-                      <option value="Sarbet" className="dark:bg-slate-900">Sarbet</option>
-                      <option value="Piassa" className="dark:bg-slate-900">Piassa</option>
-                      <option value="CMC" className="dark:bg-slate-900">CMC</option>
-                      <option value="Megenagna" className="dark:bg-slate-900">Megenagna</option>
-                      <option value="Mexico" className="dark:bg-slate-900">Mexico</option>
-                    </select>
+                    <Select value={neighbourhood} onValueChange={(val) => setNeighbourhood(val)}>
+                      <SelectTrigger id="hero-neighbourhood" className="h-8 border-none bg-transparent px-0 py-0 text-xs font-bold text-slate-900 dark:text-white focus:ring-0 shadow-none">
+                        <SelectValue placeholder="All Addis Ababa Hubs" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">All Addis Ababa Hubs</SelectItem>
+                        <SelectItem value="Bole">Bole (Airport & Express)</SelectItem>
+                        <SelectItem value="Kazanchis">Kazanchis (Business District)</SelectItem>
+                        <SelectItem value="Old Airport">Old Airport (Diplomatic)</SelectItem>
+                        <SelectItem value="Sarbet">Sarbet</SelectItem>
+                        <SelectItem value="Piassa">Piassa</SelectItem>
+                        <SelectItem value="CMC">CMC</SelectItem>
+                        <SelectItem value="Megenagna">Megenagna</SelectItem>
+                        <SelectItem value="Mexico">Mexico</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
 
                   {/* Departure Date (4 cols) */}
