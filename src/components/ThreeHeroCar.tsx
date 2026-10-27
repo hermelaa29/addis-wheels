@@ -228,12 +228,12 @@ export function ThreeHeroCar({
 
     // 7. Animation Loop with Smooth Interpolation
     let animationFrameId: number;
-    let clock = new THREE.Clock();
+    const startTime = performance.now();
 
-    const animate = () => {
+    const animate = (timestamp: number) => {
       animationFrameId = requestAnimationFrame(animate);
 
-      const elapsedTime = clock.getElapsedTime();
+      const elapsedTime = ((timestamp || performance.now()) - startTime) * 0.001;
 
       // Smooth damping (lerp) for cursor response
       currentRotationX += (targetRotationX - currentRotationX) * 0.08;
@@ -275,7 +275,7 @@ export function ThreeHeroCar({
       renderer.render(scene, camera);
     };
 
-    animate();
+    animationFrameId = requestAnimationFrame(animate);
 
     // 8. Cleanup
     return () => {
