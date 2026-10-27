@@ -130,6 +130,7 @@ export default function OwnerCarsPage() {
                   <div className="flex items-center gap-2">
                     <Link
                       href={`/owner/cars/${car.id}/edit`}
+                      aria-label={`Edit vehicle details for ${car.make} ${car.model}`}
                       className="p-1.5 bg-white border border-slate-200 rounded-lg text-slate-700 hover:text-emerald-600 hover:border-emerald-300 transition"
                       title="Edit vehicle details"
                     >
@@ -137,6 +138,7 @@ export default function OwnerCarsPage() {
                     </Link>
                     <Link
                       href={`/owner/cars/${car.id}/availability`}
+                      aria-label={`Manage availability and blocked dates for ${car.make} ${car.model}`}
                       className="p-1.5 bg-white border border-slate-200 rounded-lg text-slate-700 hover:text-emerald-600 hover:border-emerald-300 transition"
                       title="Manage blocked dates"
                     >
@@ -144,6 +146,7 @@ export default function OwnerCarsPage() {
                     </Link>
                     <Link
                       href={`/owner/cars/${car.id}/bookings`}
+                      aria-label={`View bookings for ${car.make} ${car.model}`}
                       className="p-1.5 bg-white border border-slate-200 rounded-lg text-slate-700 hover:text-emerald-600 hover:border-emerald-300 transition"
                       title="View bookings on this car"
                     >

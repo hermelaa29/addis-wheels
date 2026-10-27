@@ -37,7 +37,7 @@ export function DemoBanner() {
             onClick={handleReset}
             disabled={isResetting}
             aria-label="Reset demo data to default baseline"
-            className="inline-flex items-center gap-1.5 bg-white/10 hover:bg-white/20 text-white px-2.5 py-0.5 rounded-full text-[11px] font-medium transition border border-white/10"
+            className="inline-flex items-center gap-1.5 bg-white/10 hover:bg-white/20 text-white px-3 py-1 min-h-[32px] rounded-full text-[11px] font-medium transition border border-white/10"
             title="Reset demo data to default baseline"
           >
             <RefreshCw className={`w-3 h-3 ${isResetting ? "animate-spin" : ""}`} />
@@ -46,7 +46,7 @@ export function DemoBanner() {
           <button
             onClick={() => setDismissed(true)}
             aria-label="Dismiss banner"
-            className="text-slate-400 hover:text-white p-0.5 transition"
+            className="p-2 min-w-[32px] min-h-[32px] flex items-center justify-center rounded-lg hover:bg-white/10 text-slate-400 hover:text-white transition"
           >
             <X className="w-3.5 h-3.5" />
           </button>

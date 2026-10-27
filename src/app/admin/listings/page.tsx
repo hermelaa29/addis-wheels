@@ -171,6 +171,7 @@ export default function AdminListingsPage() {
                           )}
                           <Link
                             href={`/cars/${c.id}`}
+                            aria-label={`Preview details for ${c.make} ${c.model}`}
                             className="inline-block p-1 text-slate-400 hover:text-slate-800 transition"
                             title="Preview car details page"
                           >
