@@ -5,7 +5,9 @@ import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import {
   getBookingById,
+  getBookingSlug,
   getCarById,
+  getCarSlug,
   getUserById,
   transitionBooking,
   createDispute,
@@ -261,7 +263,7 @@ export default function BookingDetailPage() {
             <div className="flex flex-wrap items-center gap-3">
               {booking.status === "in_progress" && (
                 <Link
-                  href={`/bookings/${booking.id}/track`}
+                  href={`/bookings/${getBookingSlug(booking, car)}/track`}
                   className="px-4 py-2 bg-sky-600 hover:bg-sky-500 text-white font-semibold rounded-xl text-xs transition flex items-center gap-1.5"
                 >
                   <Compass className="w-3.5 h-3.5" /> Track Route Simulation
@@ -270,7 +272,7 @@ export default function BookingDetailPage() {
 
               {booking.status === "completed" && (
                 <Link
-                  href={`/bookings/${booking.id}/review`}
+                  href={`/bookings/${getBookingSlug(booking, car)}/review`}
                   className="px-4 py-2 bg-amber-600 hover:bg-amber-500 text-white font-semibold rounded-xl text-xs transition flex items-center gap-1.5"
                 >
                   <Star className="w-3.5 h-3.5" /> Rate & Review Trip

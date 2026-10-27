@@ -3,7 +3,7 @@
 import React, { useMemo } from "react";
 import Link from "next/link";
 import { useSession, useIsMounted } from "@/lib/useStorage";
-import { getBookings, getCarById, transitionBooking, generateCsv, downloadCsv } from "@/lib/data";
+import { getBookings, getCarById, getBookingSlug, transitionBooking, generateCsv, downloadCsv } from "@/lib/data";
 import { RoleGuard } from "@/components/RoleGuard";
 import { Badge } from "@/components/Badge";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
@@ -181,7 +181,7 @@ export default function RenterDashboardPage() {
               </div>
             </div>
             <Link
-              href={`/bookings/${activeBookings[0].id}/track`}
+              href={`/bookings/${getBookingSlug(activeBookings[0])}/track`}
               className="px-5 py-2.5 bg-white text-emerald-800 rounded-full font-bold text-xs shadow-md hover:bg-slate-100 transition whitespace-nowrap"
             >
               Simulate Live GPS Track &rarr;
@@ -271,7 +271,7 @@ export default function RenterDashboardPage() {
 
                         <td className="px-6 py-4 whitespace-nowrap text-right space-x-2">
                           <Link
-                            href={`/bookings/${b.id}`}
+                            href={`/bookings/${getBookingSlug(b, car)}`}
                             className="inline-block text-xs font-bold text-emerald-600 hover:text-emerald-700 underline"
                           >
                             Receipt
@@ -279,7 +279,7 @@ export default function RenterDashboardPage() {
 
                           {b.status === "in_progress" && (
                             <Link
-                              href={`/bookings/${b.id}/track`}
+                              href={`/bookings/${getBookingSlug(b, car)}/track`}
                               className="inline-block text-xs font-bold text-sky-600 hover:text-sky-700 underline"
                             >
                               Track
@@ -288,7 +288,7 @@ export default function RenterDashboardPage() {
 
                           {b.status === "completed" && (
                             <Link
-                              href={`/bookings/${b.id}/review`}
+                              href={`/bookings/${getBookingSlug(b, car)}/review`}
                               className="inline-block text-xs font-bold text-amber-600 hover:text-amber-700 underline"
                             >
                               Review

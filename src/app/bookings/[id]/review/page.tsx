@@ -5,7 +5,9 @@ import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import {
   getBookingById,
+  getBookingSlug,
   getCarById,
+  getCarSlug,
   getReviews,
   createReview,
 } from "@/lib/data";
@@ -73,7 +75,7 @@ export default function BookingReviewPage() {
         <p className="text-xs text-slate-500 mb-4">
           Reviews can only be submitted after a rental is marked completed by the host. Current status is &quot;{booking.status}&quot;.
         </p>
-        <Link href={`/bookings/${booking.id}`} className="text-xs font-bold text-emerald-600 underline">
+        <Link href={`/bookings/${getBookingSlug(booking, car)}`} className="text-xs font-bold text-emerald-600 underline">
           View Booking Details
         </Link>
       </div>
@@ -97,7 +99,7 @@ export default function BookingReviewPage() {
 
     setSuccess(true);
     setTimeout(() => {
-      router.push(`/cars/${car.id}`);
+      router.push(`/cars/${getCarSlug(car)}`);
     }, 1200);
   };
 
@@ -107,7 +109,7 @@ export default function BookingReviewPage() {
         <Breadcrumbs
           items={[
             { label: "Bookings", href: "/bookings" },
-            { label: `Booking #${booking.id}`, href: `/bookings/${booking.id}` },
+            { label: `Booking #${booking.id}`, href: `/bookings/${getBookingSlug(booking, car)}` },
             { label: "Rate & Review" },
           ]}
         />
@@ -145,7 +147,7 @@ export default function BookingReviewPage() {
               )}
               <div className="pt-2">
                 <Link
-                  href={`/cars/${car.id}`}
+                  href={`/cars/${getCarSlug(car)}`}
                   className="inline-flex items-center gap-1 text-xs font-bold text-emerald-600 hover:underline"
                 >
                   View on Car Page &rarr;

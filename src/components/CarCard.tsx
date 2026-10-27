@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { Car as CarType } from "@/types";
+import { getCarSlug } from "@/lib/data";
 import { Badge } from "./Badge";
 import { MapPin, Users, ShieldCheck, ArrowRight } from "lucide-react";
 
@@ -110,7 +111,7 @@ export function CarCard({ car, showStatus = false, priority = false }: CarCardPr
         {/* CTA Button */}
         <div className="pt-3 border-t border-slate-100 dark:border-slate-800 mt-2">
           <Link
-            href={`/cars/${car.id}`}
+            href={`/cars/${getCarSlug(car)}`}
             aria-label={`View details and rental pricing for ${car.year} ${car.make} ${car.model} in ${car.neighbourhood}`}
             className="w-full inline-flex items-center justify-center gap-1.5 py-2.5 px-4 bg-slate-900 dark:bg-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition-colors shadow-sm"
           >

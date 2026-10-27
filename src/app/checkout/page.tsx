@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { getCarById, createBooking } from "@/lib/data";
+import { getCarById, createBooking, getBookingSlug } from "@/lib/data";
 import { getCheckoutDraft, clearCheckoutDraft } from "@/lib/storage";
 import { useSession, useIsMounted } from "@/lib/useStorage";
 import { RoleGuard } from "@/components/RoleGuard";
@@ -58,7 +58,7 @@ export default function CheckoutPage() {
       }
 
       clearCheckoutDraft();
-      router.push(`/bookings/${result.booking.id}`);
+      router.push(`/bookings/${getBookingSlug(result.booking, car)}`);
     } catch {
       setError("An unexpected storage error occurred during payment simulation.");
       setIsSubmitting(false);

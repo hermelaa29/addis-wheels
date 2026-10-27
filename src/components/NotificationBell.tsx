@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { Bell, AlertCircle, CheckCircle, Car, ShieldAlert, Sparkles, X } from "lucide-react";
 import { useSession } from "@/lib/useStorage";
-import { getBookings, getDisputes, getAnnouncements } from "@/lib/data";
+import { getBookings, getDisputes, getAnnouncements, getBookingSlug } from "@/lib/data";
 import Link from "next/link";
 
 interface NotificationItem {
@@ -45,7 +45,7 @@ export function NotificationBell() {
             title: "Booking Confirmed",
             message: `Your reservation from ${b.startDate} to ${b.endDate} was approved by the host!`,
             type: "success",
-            link: `/bookings/${b.id}`,
+            link: `/bookings/${getBookingSlug(b)}`,
             time: new Date(b.updatedAt).toLocaleDateString(),
           });
         } else if (b.status === "requested") {
@@ -54,7 +54,7 @@ export function NotificationBell() {
             title: "Booking Request Pending",
             message: `Awaiting host confirmation for your ${b.days}-day rental.`,
             type: "warning",
-            link: `/bookings/${b.id}`,
+            link: `/bookings/${getBookingSlug(b)}`,
             time: new Date(b.createdAt).toLocaleDateString(),
           });
         }

@@ -3,8 +3,43 @@
 import React, { useState, useMemo, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
 import { CarCard } from "@/components/CarCard";
-import { ThreeHeroCar } from "@/components/ThreeHeroCar";
+
+const ThreeHeroCar = dynamic(
+  () => import("@/components/ThreeHeroCar").then((m) => m.ThreeHeroCar),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="relative w-full aspect-[4/3] sm:aspect-[16/11] max-w-lg lg:max-w-none flex items-center justify-center select-none">
+        <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/20 via-teal-500/10 to-transparent rounded-full blur-[80px] pointer-events-none -z-10" />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/hero-car-cutout.png"
+          alt="Suzuki Swift DualJet"
+          width={480}
+          height={270}
+          fetchPriority="high"
+          decoding="async"
+          className="max-h-[85%] max-w-[90%] object-contain drop-shadow-2xl"
+        />
+        <div className="absolute bottom-2 inset-x-3 sm:inset-x-6 z-20 flex items-center justify-between p-3 rounded-2xl bg-white/70 dark:bg-slate-900/70 border border-white/80 dark:border-white/10 backdrop-blur-xl shadow-xl shadow-black/10 dark:shadow-black/40">
+          <div className="flex flex-col text-left">
+            <div className="flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="text-xs font-black tracking-wide text-slate-950 dark:text-white uppercase">
+                Suzuki Swift DualJet
+              </span>
+            </div>
+            <span className="text-[10px] text-slate-500 dark:text-slate-400 font-medium">
+              Pearl White • 1.2L DualJet • 23 km/L • 5-Speed
+            </span>
+          </div>
+        </div>
+      </div>
+    ),
+  }
+);
 import { getCars } from "@/lib/data";
 import { SEED_CARS } from "@/lib/seedData";
 import { useIsMounted } from "@/lib/useStorage";

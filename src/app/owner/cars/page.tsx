@@ -3,7 +3,7 @@
 import React, { useMemo } from "react";
 import Link from "next/link";
 import { useSession, useIsMounted } from "@/lib/useStorage";
-import { getCars } from "@/lib/data";
+import { getCars, getCarSlug } from "@/lib/data";
 import { RoleGuard } from "@/components/RoleGuard";
 import { Badge } from "@/components/Badge";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
@@ -155,7 +155,7 @@ export default function OwnerCarsPage() {
                   </div>
 
                   <Link
-                    href={`/cars/${car.id}`}
+                    href={`/cars/${getCarSlug(car)}`}
                     className="inline-flex items-center gap-1 text-emerald-600 hover:text-emerald-700 font-semibold text-xs"
                   >
                     <span>Public View</span>

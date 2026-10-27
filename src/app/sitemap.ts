@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
 import { SEED_CARS } from "@/lib/seedData";
+import { getCarSlug } from "@/lib/data";
 
 const baseUrl =
   process.env.NEXT_PUBLIC_APP_URL ||
@@ -40,7 +41,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const carRoutes: MetadataRoute.Sitemap = SEED_CARS.filter(
     (c) => c.status === "approved"
   ).map((car) => ({
-    url: `${baseUrl}/cars/${car.id}`,
+    url: `${baseUrl}/cars/${getCarSlug(car)}`,
     lastModified: now,
     changeFrequency: "weekly",
     priority: 0.8,

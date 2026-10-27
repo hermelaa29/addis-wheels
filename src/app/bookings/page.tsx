@@ -3,7 +3,7 @@
 import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import { useSession, useIsMounted } from "@/lib/useStorage";
-import { getBookings, getCarById, transitionBooking, generateCsv, downloadCsv } from "@/lib/data";
+import { getBookings, getCarById, getBookingSlug, transitionBooking, generateCsv, downloadCsv } from "@/lib/data";
 import { RoleGuard } from "@/components/RoleGuard";
 import { Badge } from "@/components/Badge";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
@@ -224,7 +224,7 @@ export default function RenterBookingsPage() {
 
                         <td className="px-6 py-4 whitespace-nowrap text-right space-x-2">
                           <Link
-                            href={`/bookings/${b.id}`}
+                            href={`/bookings/${getBookingSlug(b, car)}`}
                             className="inline-block text-xs font-semibold text-emerald-600 hover:text-emerald-700 underline"
                           >
                             Details & Receipt
@@ -232,7 +232,7 @@ export default function RenterBookingsPage() {
 
                           {b.status === "in_progress" && (
                             <Link
-                              href={`/bookings/${b.id}/track`}
+                              href={`/bookings/${getBookingSlug(b, car)}/track`}
                               className="inline-block text-xs font-semibold text-sky-600 hover:text-sky-700 underline"
                             >
                               Track
@@ -241,7 +241,7 @@ export default function RenterBookingsPage() {
 
                           {b.status === "completed" && (
                             <Link
-                              href={`/bookings/${b.id}/review`}
+                              href={`/bookings/${getBookingSlug(b, car)}/review`}
                               className="inline-block text-xs font-semibold text-amber-600 hover:text-amber-700 underline"
                             >
                               Review

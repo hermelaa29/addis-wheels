@@ -23,6 +23,15 @@ import {
   isBrowser,
   initializeDemoData,
 } from "./storage";
+import { SEED_CARS, SEED_BOOKINGS } from "./seedData";
+import {
+  findCarByIdOrSlug,
+  findBookingByIdOrSlug,
+  getCarSlug,
+  getBookingSlug,
+} from "./slugs";
+
+export { getCarSlug, getBookingSlug };
 
 // ==========================================
 // Safe URL & Return Path Validation
@@ -225,10 +234,12 @@ export function getCars(filters?: {
 
   return cars;
 }
-
-export function getCarById(id: string): Car | null {
-  const cars = readStorage<Car[]>(STORAGE_KEYS.CARS) || [];
-  return cars.find((c) => c.id === id) || null;
+ 
+export function getCarById(idOrSlug: string): Car | null {
+  if (!idOrSlug) return null;
+  const storedCars = readStorage<Car[]>(STORAGE_KEYS.CARS);
+  const cars = storedCars && storedCars.length > 0 ? storedCars : SEED_CARS;
+  return findCarByIdOrSlug(idOrSlug, cars);
 }
 
 export function saveCar(
@@ -396,9 +407,11 @@ export function getBookings(filters?: {
   return bookings.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 }
 
-export function getBookingById(bookingId: string): Booking | null {
-  const bookings = readStorage<Booking[]>(STORAGE_KEYS.BOOKINGS) || [];
-  return bookings.find((b) => b.id === bookingId) || null;
+export function getBookingById(idOrSlug: string): Booking | null {
+  if (!idOrSlug) return null;
+  const storedBookings = readStorage<Booking[]>(STORAGE_KEYS.BOOKINGS);
+  const bookings = storedBookings && storedBookings.length > 0 ? storedBookings : SEED_BOOKINGS;
+  return findBookingByIdOrSlug(idOrSlug, bookings);
 }
 
 export function createBooking(data: {

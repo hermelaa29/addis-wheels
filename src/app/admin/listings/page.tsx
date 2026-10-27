@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo } from "react";
 import Link from "next/link";
-import { getCars, moderateCar, getUserById } from "@/lib/data";
+import { getCars, moderateCar, getUserById, getCarSlug } from "@/lib/data";
 import { useIsMounted } from "@/lib/useStorage";
 import { RoleGuard } from "@/components/RoleGuard";
 import { Badge } from "@/components/Badge";
@@ -170,7 +170,7 @@ export default function AdminListingsPage() {
                             </button>
                           )}
                           <Link
-                            href={`/cars/${c.id}`}
+                            href={`/cars/${getCarSlug(c)}`}
                             aria-label={`Preview details for ${c.make} ${c.model}`}
                             className="inline-block p-1 text-slate-400 hover:text-slate-800 transition"
                             title="Preview car details page"

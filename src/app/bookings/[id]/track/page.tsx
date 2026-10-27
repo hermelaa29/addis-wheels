@@ -3,7 +3,7 @@
 import React, { useMemo } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import { getBookingById, getCarById } from "@/lib/data";
+import { getBookingById, getCarById, getBookingSlug } from "@/lib/data";
 import { useSession, useIsMounted } from "@/lib/useStorage";
 import { useLiveTelemetrySWR } from "@/lib/useSWRData";
 import { RoleGuard } from "@/components/RoleGuard";
@@ -65,7 +65,7 @@ export default function TrackingSimulationPage() {
         <Breadcrumbs
           items={[
             { label: "Bookings", href: "/bookings" },
-            { label: `Booking #${booking.id}`, href: `/bookings/${booking.id}` },
+            { label: `Booking #${booking.id}`, href: `/bookings/${getBookingSlug(booking, car)}` },
             { label: "Simulated Vehicle Tracking" },
           ]}
         />
@@ -200,7 +200,7 @@ export default function TrackingSimulationPage() {
               </p>
               <div className="pt-2">
                 <Link
-                  href={`/bookings/${booking.id}`}
+                  href={`/bookings/${getBookingSlug(booking, car)}`}
                   className="inline-block text-xs font-bold text-emerald-600 hover:underline"
                 >
                   &larr; Return to Trip Receipt

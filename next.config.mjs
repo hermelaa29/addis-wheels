@@ -12,7 +12,15 @@ const nextConfig = {
     ],
   },
   experimental: {
-    optimizePackageImports: ["lucide-react", "recharts", "leaflet"],
+    optimizePackageImports: [
+      "lucide-react",
+      "recharts",
+      "leaflet",
+      "three",
+      "gsap",
+      "@radix-ui/react-select",
+      "@radix-ui/react-dropdown-menu",
+    ],
   },
   poweredByHeader: false,
   reactStrictMode: true,
