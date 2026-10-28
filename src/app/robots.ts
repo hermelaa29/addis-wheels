@@ -1,13 +1,7 @@
 import { MetadataRoute } from "next";
-
-const siteUrl =
-  process.env.NEXT_PUBLIC_APP_URL ||
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "") ||
-  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "") ||
-  "https://addis-wheels.vercel.app";
+import { SITE_URL } from "@/lib/siteConfig";
 
 export default function robots(): MetadataRoute.Robots {
-
   return {
     rules: {
       userAgent: "*",
@@ -22,6 +16,6 @@ export default function robots(): MetadataRoute.Robots {
         "/admin/*",
       ],
     },
-    sitemap: `${siteUrl}/sitemap.xml`,
+    sitemap: `${SITE_URL}/sitemap.xml`,
   };
 }

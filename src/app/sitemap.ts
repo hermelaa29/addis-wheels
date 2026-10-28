@@ -1,37 +1,32 @@
 import { MetadataRoute } from "next";
 import { SEED_CARS } from "@/lib/seedData";
-import { getCarSlug } from "@/lib/data";
-
-const baseUrl =
-  process.env.NEXT_PUBLIC_APP_URL ||
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "") ||
-  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "") ||
-  "https://addis-wheels.vercel.app";
+import { getCarSlug } from "@/lib/slugs";
+import { SITE_URL } from "@/lib/siteConfig";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
   const staticRoutes: MetadataRoute.Sitemap = [
     {
-      url: `${baseUrl}`,
+      url: `${SITE_URL}`,
       lastModified: now,
       changeFrequency: "daily",
       priority: 1.0,
     },
     {
-      url: `${baseUrl}/cars`,
+      url: `${SITE_URL}/cars`,
       lastModified: now,
       changeFrequency: "daily",
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/signin`,
+      url: `${SITE_URL}/signin`,
       lastModified: now,
       changeFrequency: "monthly",
       priority: 0.5,
     },
     {
-      url: `${baseUrl}/signup`,
+      url: `${SITE_URL}/signup`,
       lastModified: now,
       changeFrequency: "monthly",
       priority: 0.6,
@@ -41,7 +36,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const carRoutes: MetadataRoute.Sitemap = SEED_CARS.filter(
     (c) => c.status === "approved"
   ).map((car) => ({
-    url: `${baseUrl}/cars/${getCarSlug(car)}`,
+    url: `${SITE_URL}/cars/${getCarSlug(car)}`,
     lastModified: now,
     changeFrequency: "weekly",
     priority: 0.8,
